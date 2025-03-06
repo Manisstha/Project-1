@@ -1,2 +1,8 @@
-@import url('styles/_colors.css');
-@import url('styles/_fonts.css');
+@import url('_colors.css');
+@import url('_fonts.css');
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--main-blue1);
+}
