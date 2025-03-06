@@ -1,0 +1,13 @@
+:host {
+  --main-blue1: #072ac8;
+  --main-blue2: #43d2ff;
+  --main-blue3: #a2d6f9;
+  --main-blue4: #d1edff;
+
+    --main-grey1: #292E47;
+    --main-grey2: #6B708D;
+    --main-grey3: #F2F4FC; 
+    --main-grey4: #ECF7FF;
+
+    --main-yellow: #FFC600;
+}
