@@ -1,2 +1,15 @@
 :host {
+  font-family: "Roboto", sans-serif;
+  color: #292e47;
+
+  --heading-h1: 60px bold;
+  --heading-h2: 50px bold;
+  --heading-h3: 40px bold;
+  --heading-h4: 24px bold;
+  --body-intro-24: 24px medium;
+  --body-intro-20: 20px regular;
+  --headline-text-regular: 17px regular;
+  --headline-text-medium: 17px medium;
+  --caption-1: 15px regular;
+  --caption-2: 13px regular;
 }
