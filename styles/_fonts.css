@@ -1,15 +1,23 @@
-:host {
+:root {
   font-family: "Roboto", sans-serif;
-  color: #292e47;
+  color: #514d67;
 
-  --heading-h1: 60px bold;
-  --heading-h2: 50px bold;
-  --heading-h3: 40px bold;
-  --heading-h4: 24px bold;
-  --body-intro-24: 24px medium;
-  --body-intro-20: 20px regular;
-  --headline-text-regular: 17px regular;
-  --headline-text-medium: 17px medium;
-  --caption-1: 15px regular;
-  --caption-2: 13px regular;
+  --heading-h1-size: 60px;
+  --heading-h1-weight: bold;
+  --heading-h2-size: 50px;
+  --heading-h2-weight: bold;
+  --heading-h3-size: 40px;
+  --heading-h3-weight: bold;
+  --heading-h4-size: 24px;
+  --heading-h4-weight: bold;
+  --body-intro-24-size: 24px;
+  --body-intro-24-weight: 500;
+  --body-intro-20-size: 20px;
+  --body-intro-20-weight: 400;
+  --headline-text-medium-size: 17px;
+  --headline-text-medium-weight: 500;
+  --caption-1-size: 15px;
+  --caption-1-weight: 400;
+  --caption-2-size: 13px;
+  --caption-2-weight: 400;
 }
