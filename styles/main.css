@@ -19,7 +19,6 @@ body {
   font-family: var(--font-family);
   color: var(--text-color);
   background-color: var(--main-grey3);
-  line-height: 1.2em;
   font-size: 17px;
 }
 
