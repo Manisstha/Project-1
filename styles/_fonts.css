@@ -13,8 +13,9 @@
   --body-intro-24-size: 24px;
   --body-intro-24-weight: 500;
   --body-intro-20-size: 20px;
-  --body-intro-20-weight: 400;
-  --headline-text-medium-size: 17px;
+  --body-intro-20-weight: 400; 
+  --headline-text-size: 17px;
+  --headline-text-regular-weight: 400;
   --headline-text-medium-weight: 500;
   --caption-1-size: 15px;
   --caption-1-weight: 400;
