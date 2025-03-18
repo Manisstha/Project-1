@@ -55,100 +55,28 @@ nav {
   font-weight: var(--headline-text-medium-weight);
 }
 
-.contact-section {
-  padding: 50px 0 50px 0;
-  width: 100vw;
-  max-width: 100%;
-  height: 830px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.services-main-container{
+    max-width: 1100px;
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.contact-container {
-  width: 1100px;
-  max-width: 100%;
-  height: 100%;
+.div-image-construction{
+    width: 100%;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  padding-top: 50px;
+.under-construction-icon{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
-.form-full-name,
-.form-email,
-.form-phone,
-.form-message {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.form-full-name {
-  width: 100%;
-  height: 110px;
-}
-
-.form-row {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.form-email,
-.form-phone {
-  width: 48%;
-  height: 110px;
-}
-
-.form-message {
-  width: 100%;
-  height: 240px;
-}
-
-label {
-  font-size: var(--body-intro-20-size);
-  font-weight: var(--body-intro-20-weight);
-}
-
-input {
-  width: 100%;
-  height: 70px;
-  padding: 0 20px;
-  font-size: var(--headline-text-size);
-  font-weight: var(--headline-text-regular-weight);
-  border: none;
-  background-color: var(--main-grey2-opacity);
-}
-
-input:focus,
-textarea:focus {
-  border: var(--main-grey2) 2px solid;
-  outline: none;
-}
-
-textarea {
-  width: 100%;
-  height: 200px;
-  padding: 20px;
-  font-size: var(--headline-text-size);
-  font-weight: var(--headline-text-regular-weight);
-  border: none;
-  background-color: var(--main-grey2-opacity);
-}
-
-.form-submit-btn {
-  background-color: var(--main-blue1);
-  color: #ffffff;
-  border: none;
-  width: 1100px;
-  height: 80px;
-  font-size: var(--headline-text-size);
-  font-weight: var(--headline-text-medium-weight);
-}
 
 .footer {
   padding: 50px 0 50px 0;
