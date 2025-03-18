@@ -1,10 +1,6 @@
 @import url("_colors.css");
 @import url("_fonts.css");
 
-body {
-  font-size: 17px;
-}
-
 nav {
   width: 100vw;
   max-width: 100%;

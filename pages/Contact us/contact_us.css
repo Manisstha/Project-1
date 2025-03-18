@@ -1,0 +1,117 @@
+@import url("_colors.css");
+@import url("_fonts.css");
+
+nav {
+  width: 100vw;
+  max-width: 100%;
+  height: 122px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-container {
+  width: 100vw;
+  max-width: 100%;
+  padding-top: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-container-logo,
+.nav-main-contact-us {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-main-links {
+  flex: 3;
+  text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  height: 100%;
+  list-style-type: none;
+  font-size: var(--headline-text-size);
+  font-weight: var(--headline-text-medium-weight);
+}
+
+.nav-links a:hover {
+  color: var(--main-blue1);
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-contact-button {
+  background-color: var(--main-blue1);
+  color: #ffffff;
+  border: none;
+  width: 150px;
+  height: 52px;
+  font-size: var(--headline-text-size);
+  font-weight: var(--headline-text-medium-weight);
+}
+
+/* Responsive design for tablets */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  nav {
+    height: auto;
+  }
+
+  .nav-container {
+    padding-top: 20px;
+  }
+
+  .nav-links {
+    gap: 30px;
+    font-size: 15px;
+  }
+
+  .nav-contact-button {
+    width: 130px;
+    height: 50px;
+    font-size: 15px;
+  }
+}
+
+/* Responsive or mobile */
+@media (max-width: 425px) {
+  body {
+    font-size: 15px;
+  }
+
+  nav {
+    height: auto;
+  }
+
+  .nav-container {
+    padding-top: 10px;
+    flex-direction: column;
+  }
+
+  .nav-container-logo,
+  .nav-main-contact-us,
+  .nav-main-links {
+    margin: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+    padding: 0;
+  }
+
+  .nav-contact-button {
+    width: 120px;
+    height: 45px;
+    font-size: 14px;
+  }
+}
