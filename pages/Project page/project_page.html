@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project page</title>
+    <script src="../../javascript/index.js"></script>
+    <script src="../../db.json"></script>
     <link rel="stylesheet" href="../../styles/main.css" />
     <link rel="stylesheet" href="./project_page.css" />
   </head>
@@ -27,7 +29,12 @@
           </ul>
         </div>
         <div class="nav-main-contact-us">
-          <button onclick="window.location.href='../Contact us/contact_us.html'" class="nav-contact-button">Contact Us</button>
+          <button
+            onclick="window.location.href='../Contact us/contact_us.html'"
+            class="nav-contact-button"
+          >
+            Contact Us
+          </button>
         </div>
       </div>
     </nav>
@@ -124,12 +131,15 @@
           <h3 class="h3-cta">Do you have any questions?</h3>
           <p class="p-cta">Let us help you!</p>
           <div class="subscribe-email">
-            <input
-              class="cta-input"
-              type="email"
-              placeholder="Enter your email"
-            />
-            <button class="cta-button">Subscribe</button>
+            <form id="cta-form">
+              <input
+                class="cta-input"
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+              />
+              <button class="cta-button" type="submit">Subscribe</button>
+            </form>
           </div>
         </div>
       </div>
@@ -151,12 +161,12 @@
         </div>
         <div class="div-footer-links">
           <ul class="ul-footer-links">
-            <li><a href="./index.html">Team</a></li>
+            <li><a href="#">Team</a></li>
             <li><a href="../Services page/services_page.html">Services</a></li>
-            <li><a href="./index.html">About Us</a></li>
-            <li><a href="./index.html">Press</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Press</a></li>
             <li><a href="./project_page.html">Projects</a></li>
-            <li><a href="./index.html">Privacy Policy</a></li>
+            <li><a href="#">Privacy Policy</a></li>
           </ul>
         </div>
       </div>
