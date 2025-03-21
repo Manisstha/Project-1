@@ -32,7 +32,7 @@ Responsive Design
 
 Clone the repository: bash
 or from github:
-git clone https://github.com/your-repo-url.git
+git clone https://github.com/Manisstha/Project-1
 cd project-folder
 Open index.html in a browser or run using a local development server.
 Navigate through different pages using the header menu.
