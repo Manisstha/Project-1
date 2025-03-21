@@ -43,7 +43,7 @@ const loadData = async () => {
     return JSON.parse(projects);
   } catch (error) {
     console.error("Error al cargar los datos:", error);
-    return { projects: [] }; // Retorna un array vacío en caso de error
+    return { projects: [], subscribeMail: [], contactUs: [] }; // Retorna arrays vacíos en caso de error
   }
 };
 
@@ -88,17 +88,41 @@ module.exports.handler = async (event) => {
         };
       }
     }
-  } else if (httpMethod === "POST" && entity === "projects") {
-    // POST a "/projects" para agregar un nuevo proyecto
-    const newProject = JSON.parse(event.body);
-    newProject.uuid = data.projects.length + 1; // Generar un nuevo ID
-    data.projects.push(newProject);
-    saveData(data); // Guardar en localStorage
+  } else if (httpMethod === "POST") {
+    if (entity === "projects") {
+      // POST a "/projects" para agregar un nuevo proyecto
+      const newProject = JSON.parse(event.body);
+      newProject.uuid = data.projects.length + 1; // Generar un nuevo ID
+      data.projects.push(newProject);
+      saveData(data); // Guardar en localStorage
 
-    return {
-      statusCode: 201,
-      body: JSON.stringify(newProject),
-    };
+      return {
+        statusCode: 201,
+        body: JSON.stringify(newProject),
+      };
+    } else if (entity === "subscribeMail") {
+      // POST a "/subscribeMail" para agregar un nuevo correo de suscripción
+      const newSubscription = JSON.parse(event.body);
+      newSubscription.id = Date.now().toString(); // Generar un ID único
+      data.subscribeMail.push(newSubscription);
+      saveData(data);
+
+      return {
+        statusCode: 201,
+        body: JSON.stringify(newSubscription),
+      };
+    } else if (entity === "contactUs") {
+      // POST a "/contactUs" para agregar un nuevo mensaje de contacto
+      const newContact = JSON.parse(event.body);
+      newContact.id = Date.now().toString(); // Generar un ID único
+      data.contactUs.push(newContact);
+      saveData(data);
+
+      return {
+        statusCode: 201,
+        body: JSON.stringify(newContact),
+      };
+    }
   } else if (httpMethod === "PUT" && entity === "projects" && uuid) {
     // PUT a "/projects/{uuid}" para actualizar un proyecto existente
     const updatedProject = JSON.parse(event.body);
