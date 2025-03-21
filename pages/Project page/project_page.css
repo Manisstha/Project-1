@@ -55,6 +55,10 @@ nav {
   font-weight: var(--headline-text-medium-weight);
 }
 
+.nav-contact-button:active {
+  transform: scale(0.95);
+}
+
 .project-section {
   padding: 50px 0 50px 0;
   display: flex;
@@ -211,6 +215,11 @@ nav {
   color: var(--main-grey1);
 }
 
+form {
+  display: flex;
+  gap: 30px;
+}
+
 .cta-input:focus {
   border: var(--main-blue1) 2px solid;
   outline: none;
@@ -224,6 +233,10 @@ nav {
   height: 80px;
   font-size: var(--headline-text-size);
   font-weight: var(--headline-text-medium-weight);
+}
+
+.cta-button:active {
+  transform: scale(0.95);
 }
 
 .footer {
@@ -284,7 +297,7 @@ nav {
 }
 
 /* Responsive design for tablets */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   body {
     font-size: 16px;
   }
@@ -293,19 +306,142 @@ nav {
     height: auto;
   }
 
+  h1 {
+    font-size: 44px;
+  }
+
+  h3 {
+    font-size: 32px;
+  }
+
   .nav-container {
-    padding-top: 20px;
+    padding-top: 50px;
+  }
+
+  .nav-container-logo,
+  .nav-main-contact-us {
+    flex: 1;
+    text-align: center;
+  }
+
+  .nav-main-links {
+    flex: 3;
   }
 
   .nav-links {
-    gap: 30px;
-    font-size: 15px;
+    display: flex;
+    gap: 70px;
   }
 
   .nav-contact-button {
-    width: 130px;
-    height: 50px;
-    font-size: 15px;
+    width: 120px;
+    height: 45px;
+  }
+
+  .project-section {
+    padding: 50px 0;
+  }
+
+  .div-project-main-containerr {
+    width: 100vw;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .project-description {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding-top: 30px;
+    gap: 20px;
+  }
+
+  .project1-img {
+    width: 100%;
+    height: auto; 
+    object-fit: cover; 
+  }
+
+  .other-projects-section {
+    padding: 40px 0;
+    height: auto;
+  }
+
+  .div-other-projects-main-container {
+    width: 90%;
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .div-projects {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .div-project-4,
+  .div-project-5,
+  .div-project-6 {
+    width: 100%;
+    max-width: 320px;
+    height: 400px;
+    margin-bottom: 20px;
+  }
+
+  .project4-img,
+  .project5-img,
+  .project6-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .title-text {
+    font-size: 20px;
+    margin: 10px 0 0 15px;
+  }
+
+  .subtitle-text {
+    font-size: 16px;
+    margin: 10px 0 0 15px;
+  }
+
+  .learnmore-text {
+    font-size: 16px;
+    margin: 20px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .cta-section {
+    padding: 40px 0;
+  }
+
+  .div-cta-main-container {
+    max-width: 90%;
+  }
+
+  .p-cta {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .footer {
+    padding: 50px 0;
+  }
+
+  .div-footer-main-container {
+    max-width: 100%;
+    margin: 40px auto;
+    justify-content: space-around;
   }
 }
 
@@ -313,6 +449,14 @@ nav {
 @media (max-width: 425px) {
   body {
     font-size: 15px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  h3 {
+    font-size: 28px;
   }
 
   nav {
@@ -340,6 +484,164 @@ nav {
   .nav-contact-button {
     width: 120px;
     height: 45px;
+    font-size: 14px;
+  }
+
+  .project-section {
+    padding: 30px 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .div-project-main-containerr {
+    height: auto;
+  }
+
+  .project-subtitle {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .project-description {
+    width: 100%;
+    height: auto;
+    gap: 20px;
+    padding-top: 30px;
+  }
+
+  .project1-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .other-projects-section {
+    padding: 30px 0;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .div-other-projects-main-container {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .other-projects-section {
+    padding: 30px 0;
+    height: auto;
+  }
+
+  .div-other-projects-main-container {
+    width: 100%;
+    height: auto;
+    padding: 0 20px;
+  }
+
+  .div-projects {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .div-project-4,
+  .div-project-5,
+  .div-project-6 {
+    width: 90%;
+    height: auto;
+    padding-bottom: 25px;
+  }
+
+  .project4-img,
+  .project5-img,
+  .project6-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .title-text {
+    font-size: 20px;
+    margin: 0 0 0 10px;
+  }
+
+  .subtitle-text {
+    font-size: 16px;
+    margin: 0 0 0 10px;
+  }
+
+  .learnmore-text {
+    font-size: 14px;
+    margin: 10px;
+  }
+
+  .div-cta-main-container {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 15px;
+    padding: 20px;
+  }
+
+  .div-cta-content {
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .h3-cta {
+    font-size: 16px;
+  }
+
+  .p-cta {
+    font-size: 14px;
+  }
+
+  .cta-input {
+    width: 100%;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .cta-input::placeholder {
+    font-size: 12px;
+  }
+
+  .cta-button {
+    width: 100%;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .div-footer-main-container {
+    flex-direction: column;
+    height: auto;
+    padding: 0px 15px 0 15px;
+  }
+
+  .div-footer-content {
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding-right: 100px;
+  }
+
+  .footer-logo {
+    width: 80px;
+    height: 25px;
+  }
+
+  .div-footer-links {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .ul-footer-links {
+    gap: 35px;
+    font-size: 14px;
+  }
+
+  .footer-address {
     font-size: 14px;
   }
 }
