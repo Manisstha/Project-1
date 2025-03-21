@@ -3,7 +3,7 @@ async function addSubscribeEmailToDB(email) {
     try {
 
         // Section to call GET request to check if email is already subscribed
-        const endpoint = "http://localhost:3000/subscribeMail"
+        const endpoint = "https://tiny-stroopwafel-d335b2.netlify.app/api/subscribeMail"
 
         const checkResponse = await fetch(endpoint, {
             method: 'GET',
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 async function addContactRequestToDB(fullName,email,phone,message) {
     try {
 
-        const endpoint = "http://localhost:3000/contactUs"
+        const endpoint = "https://tiny-stroopwafel-d335b2.netlify.app/api/contactUs"
 
         const response = await fetch(endpoint, {
             method: 'POST',
