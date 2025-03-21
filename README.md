@@ -1,7 +1,6 @@
-Overview
-Circle is a modern and responsive website designed for Circle. The website showcases recent projects, client testimonials, and service offerings, along with an easy-to-use contact form for inquiries.
+**Overview**
 
-Features:
+Circle is a modern and responsive website designed for Circle. The website showcases recent projects, client testimonials, and service offerings, along with an easy-to-use contact form for inquiries.
 
 **Homepage**
 Introduction to Circle
