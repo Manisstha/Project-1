@@ -804,7 +804,7 @@ form {
 }
 
 /* Responsive or mobile */
-@media (max-width: 425px) {
+@media (max-width: 875px) {
   body {
     font-size: 15px;
   }

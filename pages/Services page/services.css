@@ -192,7 +192,7 @@ nav {
 }
 
 /* Responsive or mobile */
-@media (max-width: 425px) {
+@media (max-width: 475px) {
   body {
     font-size: 15px;
   }
