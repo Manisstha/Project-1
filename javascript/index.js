@@ -1,69 +1,124 @@
-const https = require("https");
+//Subscribing to newsletter
+async function addSubscribeEmailToDB(email) {
+    try {
 
-const dbUrl = "https://tiny-stroopwafel-d335b2.netlify.app/public/db.json";
+        // Section to call GET request to check if email is already subscribed
+        const endpoint = "https://tiny-stroopwafel-d335b2.netlify.app/api/subscribeMail"
 
-// Function to fetch data from db.json
-const readData = () => {
-  return new Promise((resolve, reject) => {
-    https
-      .get(dbUrl, (response) => {
-        let data = "";
-        response.on("data", (chunk) => {
-          data += chunk;
+        const checkResponse = await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
-        response.on("end", () => {
-          try {
-            resolve(JSON.parse(data));
-          } catch (err) {
-            reject("Error parsing JSON");
-          }
-        });
-      })
-      .on("error", (err) => {
-        reject("Error fetching db.json: " + err.message);
-      });
-  });
-};
 
-// Function to handle requests
-exports.handler = async (event) => {
-  const { path, httpMethod, body } = event;
+        const existingEmails = await checkResponse.json();
+        console.log(existingEmails);
+        const existingEmailList = existingEmails.map(user => user.email.toLowerCase());
 
-  // Parse API path
-  const pathParts = path.split("/").filter(Boolean);
-  const entity = pathParts[1]; // projects, subscribeMail, contactUs
-  const uuid = pathParts[2] || null; // Optional UUID
-
-  try {
-    let data = await readData(); // Fetch fresh data from db.json
-
-    if (httpMethod === "GET") {
-      if (entity === "projects") {
-        if (uuid) {
-          const project = data.projects.find((p) => p.uuid == uuid);
-          if (project) return { statusCode: 200, body: JSON.stringify(project) };
-          return { statusCode: 404, body: JSON.stringify({ message: "Project not found" }) };
+        if (existingEmailList.includes(email)) {
+            alert("This email is already subscribed.");
+            return;
         }
-        return { statusCode: 200, body: JSON.stringify(data.projects) };
-      }
-    } else if (httpMethod === "POST") {
-      if (entity === "subscribeMail") {
-        const newSubscription = JSON.parse(body);
-        newSubscription.id = Date.now().toString();
-        data.subscribeMail.push(newSubscription);
 
-        return { statusCode: 201, body: JSON.stringify(newSubscription) };
-      } else if (entity === "contactUs") {
-        const newContact = JSON.parse(body);
-        newContact.id = Date.now().toString();
-        data.contactUs.push(newContact);
+        // Section to call POST request to add email to database if the email is not already subscribed
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+        })
 
-        return { statusCode: 201, body: JSON.stringify(newContact) };
-      }
+        const data = await response.json()
+        console.log(data)
+        if (response.ok) {
+            alert("You have successfully subscribed to our newsletter.")
+
+            document.getElementById("email").value = "";
+        }
+        else {
+            alert("An error occurred.")
+        }
     }
-  } catch (error) {
-    return { statusCode: 500, body: JSON.stringify({ message: "Server error", error }) };
-  }
+    catch (error) {
+        console.error("Error:", error)
+        alert("An error occurred.")
+    }
+}
 
-  return { statusCode: 404, body: JSON.stringify({ message: "Not Found" }) };
-};
+// Section to add event listener to form submission
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("cta-form").addEventListener("submit", function (event) {
+        event.preventDefault()
+
+        const email = document.getElementById("email").value.trim()
+        if (!email) {
+            alert("Please enter a valid email.")
+            return
+        }
+
+        addSubscribeEmailToDB(email)
+    });
+});
+
+//Contact Us form
+async function addContactRequestToDB(fullName,email,phone,message) {
+    try {
+
+        const endpoint = "https://tiny-stroopwafel-d335b2.netlify.app/api/contactUs"
+
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ fullName,email,phone,message }),
+        })
+
+        const data = await response.json()
+        console.log(data)
+        if (response.ok) {
+            alert("Message successfully sent.")
+            document.getElementById("contact-form").reset();
+        }
+        else {
+            alert("An error occurred.")
+        }
+    }
+    catch (error) {
+        console.error("Error:", error)
+        alert("An error occurred.")
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("contact-form").addEventListener("submit", function (event) {
+        event.preventDefault()
+
+        const fullName = document.getElementById("full-name").value
+        if (!fullName) {
+            alert("Please enter a valid name.")
+            return
+        }
+
+        const email = document.getElementById("email").value.trim()
+        if (!email) {
+            alert("Please enter a valid email.")
+            return
+        }
+
+        const phone = document.getElementById("number").value.trim()
+        if (!phone) {
+            alert("Please enter a valid phone.")
+            return
+        }
+
+        const message = document.getElementById("message").value
+        if (!message) {
+            alert("Please enter a valid message.")
+            return
+        }
+
+        addContactRequestToDB(fullName,email,phone,message)
+    });
