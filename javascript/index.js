@@ -121,4 +121,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         addContactRequestToDB(fullName,email,phone,message)
-    });
+     });
+});
