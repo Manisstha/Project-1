@@ -1,6 +1,6 @@
 const https = require("https");
 
-const dbUrl = "https://tiny-stroopwafel-d335b2.netlify.app/public/db.json";
+const dbUrl = "https://mid-project-manish.netlify.app/public/db.json";
 
 // Function to fetch data from db.json
 const readData = () => {
