@@ -1,10 +1,8 @@
 const https = require("https");
-let projects = null;
 
-// Ruta de la URL pública donde está alojado db.json
 const dbUrl = "https://tiny-stroopwafel-d335b2.netlify.app/public/db.json";
 
-// Función para obtener los datos desde db.json
+// Function to fetch data from db.json
 const readData = () => {
   return new Promise((resolve, reject) => {
     https
@@ -17,160 +15,55 @@ const readData = () => {
           try {
             resolve(JSON.parse(data));
           } catch (err) {
-            reject("Error al parsear los datos JSON");
+            reject("Error parsing JSON");
           }
         });
       })
       .on("error", (err) => {
-        reject("Error al obtener los datos de db.json: " + err.message);
+        reject("Error fetching db.json: " + err.message);
       });
   });
 };
 
-// Función para obtener los datos desde localStorage
-const loadData = async () => {
+// Function to handle requests
+exports.handler = async (event) => {
+  const { path, httpMethod, body } = event;
+
+  // Parse API path
+  const pathParts = path.split("/").filter(Boolean);
+  const entity = pathParts[1]; // projects, subscribeMail, contactUs
+  const uuid = pathParts[2] || null; // Optional UUID
+
   try {
-    if (!projects) {
-      const projectsOnJSON = await readData();
-      if (projectsOnJSON) {
-        saveData(projectsOnJSON);
-        console.log("Datos cargados desde db.json");
-        console.log(projectsOnJSON);
-        return projectsOnJSON;
-      }
-    }
+    let data = await readData(); // Fetch fresh data from db.json
 
-    return JSON.parse(projects);
-  } catch (error) {
-    console.error("Error al cargar los datos:", error);
-    return { projects: [], subscribeMail: [], contactUs: [] }; // Retorna arrays vacíos en caso de error
-  }
-};
-
-// Función para guardar los datos en localStorage
-const saveData = (data) => {
-  projects = JSON.stringify(data);
-};
-
-// Función para manejar las solicitudes
-module.exports.handler = async (event) => {
-  const { path, httpMethod } = event;
-  const [, , entity, uuid] = path.split("/"); // Separar las partes de la URL (ej. /api/projects/1)
-
-  // Leer datos desde localStorage
-  let data = await loadData();
-
-  if (httpMethod === "GET") {
-    // GET a "/projects" o "/projects/{uuid}"
-    if (entity === "projects") {
-      if (uuid) {
-        // Si se proporciona un uuid, devolver el proyecto específico
-        const project = data.projects.find(
-          (p) => parseInt(p.uuid) === parseInt(uuid)
-        );
-        if (project) {
-          return {
-            statusCode: 200,
-            body: JSON.stringify(project),
-          };
+    if (httpMethod === "GET") {
+      if (entity === "projects") {
+        if (uuid) {
+          const project = data.projects.find((p) => p.uuid == uuid);
+          if (project) return { statusCode: 200, body: JSON.stringify(project) };
+          return { statusCode: 404, body: JSON.stringify({ message: "Project not found" }) };
         }
-        return {
-          statusCode: 404,
-          body: JSON.stringify({ message: "Project not found" }),
-        };
-      } else {
-        console.log("GET /projects");
-        console.log(data);
-        // Si no se proporciona un uuid, devolver todos los proyectos
-        return {
-          statusCode: 200,
-          body: JSON.stringify(data.projects),
-        };
+        return { statusCode: 200, body: JSON.stringify(data.projects) };
+      }
+    } else if (httpMethod === "POST") {
+      if (entity === "subscribeMail") {
+        const newSubscription = JSON.parse(body);
+        newSubscription.id = Date.now().toString();
+        data.subscribeMail.push(newSubscription);
+
+        return { statusCode: 201, body: JSON.stringify(newSubscription) };
+      } else if (entity === "contactUs") {
+        const newContact = JSON.parse(body);
+        newContact.id = Date.now().toString();
+        data.contactUs.push(newContact);
+
+        return { statusCode: 201, body: JSON.stringify(newContact) };
       }
     }
-  } else if (httpMethod === "POST") {
-    if (entity === "projects") {
-      // POST a "/projects" para agregar un nuevo proyecto
-      const newProject = JSON.parse(event.body);
-      newProject.uuid = data.projects.length + 1; // Generar un nuevo ID
-      data.projects.push(newProject);
-      saveData(data); // Guardar en localStorage
-
-      return {
-        statusCode: 201,
-        body: JSON.stringify(newProject),
-      };
-    } else if (entity === "subscribeMail") {
-      // POST a "/subscribeMail" para agregar un nuevo correo de suscripción
-      const newSubscription = JSON.parse(event.body);
-      newSubscription.id = Date.now().toString(); // Generar un ID único
-      data.subscribeMail.push(newSubscription);
-      saveData(data);
-
-      return {
-        statusCode: 201,
-        body: JSON.stringify(newSubscription),
-      };
-    } else if (entity === "contactUs") {
-      // POST a "/contactUs" para agregar un nuevo mensaje de contacto
-      const newContact = JSON.parse(event.body);
-      newContact.id = Date.now().toString(); // Generar un ID único
-      data.contactUs.push(newContact);
-      saveData(data);
-
-      return {
-        statusCode: 201,
-        body: JSON.stringify(newContact),
-      };
-    }
-  } else if (httpMethod === "PUT" && entity === "projects" && uuid) {
-    // PUT a "/projects/{uuid}" para actualizar un proyecto existente
-    const updatedProject = JSON.parse(event.body);
-    const projectIndex = data.projects.findIndex(
-      (p) => parseInt(p.uuid) === parseInt(uuid)
-    );
-
-    if (projectIndex !== -1) {
-      data.projects[projectIndex] = {
-        ...data.projects[projectIndex],
-        ...updatedProject,
-      };
-      saveData(data); // Guardar en localStorage
-
-      return {
-        statusCode: 200,
-        body: JSON.stringify(data.projects[projectIndex]),
-      };
-    }
-
-    return {
-      statusCode: 404,
-      body: JSON.stringify({ message: "Project not found" }),
-    };
-  } else if (httpMethod === "DELETE" && entity === "projects" && uuid) {
-    // DELETE a "/projects/{uuid}" para eliminar un proyecto
-    const projectIndex = data.projects.findIndex(
-      (p) => parseInt(p.uuid) === parseInt(uuid)
-    );
-
-    if (projectIndex !== -1) {
-      const deletedProject = data.projects.splice(projectIndex, 1);
-      saveData(data); // Guardar en localStorage
-
-      return {
-        statusCode: 200,
-        body: JSON.stringify(deletedProject),
-      };
-    }
-
-    return {
-      statusCode: 404,
-      body: JSON.stringify({ message: "Project not found" }),
-    };
+  } catch (error) {
+    return { statusCode: 500, body: JSON.stringify({ message: "Server error", error }) };
   }
 
-  return {
-    statusCode: 404,
-    body: JSON.stringify({ message: "Not Found" }),
-  };
+  return { statusCode: 404, body: JSON.stringify({ message: "Not Found" }) };
 };
